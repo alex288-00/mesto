@@ -9,6 +9,13 @@
     justify-content: center;
 }
 
+@media screen and (max-width: 980px) {
+    .elements {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .elements {
         margin-top: 36px;

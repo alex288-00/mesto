@@ -15,7 +15,6 @@ function popupOpen (popup) {
 };
 
 //Popup редактирования профиля
-
 editbtn.addEventListener('click', function() {
     popupOpen(popup);
     nameInput.value = infoname.textContent;
@@ -35,7 +34,6 @@ savebtn.addEventListener('click', function() {
 });
 
 //Массив карточек
-
 const initialCards = [
     {
         name: 'Архыз',
@@ -62,7 +60,6 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-
 
 //Загрузка карточек из массива
 function cards (item) {
@@ -102,10 +99,7 @@ function cards (item) {
     elementNew.cloneNode(true);
     elements.append(elementNew);
 };
-//initialCards.forEach(cards);
-
-
-        
+       
 //Popup добавления места
 const addPlaceButton = document.querySelector('.profile__info-addbutton');
 const page = document.querySelector('.page');
@@ -115,27 +109,26 @@ page.append(popupAddPlace);
 addPlaceButton.addEventListener('click', function () {
     popupAddPlace.classList.add('popup_opened');
     popupAddPlace.classList.remove('popup_hidden');
+    
     const popupAddTitle = popupAddPlace.querySelector('.popup__title');
     popupAddTitle.textContent = 'Новое место';
     const popupAddName = popupAddPlace.querySelector('.popup__field_name');
     popupAddName.placeholder = 'Название';
     const popupAddUrl = popupAddPlace.querySelector('.popup__field_job');
     popupAddUrl.placeholder = 'Ссылка на картинку';
-    popupAddPlace.querySelector('.popup__button').textContent = 'Создать';
-    
+    popupAddPlace.querySelector('.popup__button').textContent = 'Создать';  
 });
 
 const popupClose = popupAddPlace.querySelector('.popup__close');
 popupClose.addEventListener('click', function () {
     popupAddPlace.classList.remove('popup_opened');
     popupAddPlace.classList.add('popup_hidden');
-})
+});
 
 //Добавление нового места
 const elements = document.querySelector('.elements');
 const elementTemplate = document.querySelector('#element-temp').content;
 const elementNew = elementTemplate.cloneNode(true);
-
 
 function create (elem) {
 
@@ -148,10 +141,8 @@ function create (elem) {
     popupAddPlace.classList.add('popup_hidden');    
     popupAddPlace.querySelector('.popup__field_job').value = '';
     popupAddPlace.querySelector('.popup__field_name').value = '';
-
     elementNew.querySelector('.element__like').addEventListener('click', function(evt) {
-        evt.target.classList.toggle('element__like_active');    
-        
+        evt.target.classList.toggle('element__like_active');        
     });
 
     const removeBtn = elementNew.querySelector('.element__trash');

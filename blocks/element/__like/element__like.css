@@ -6,4 +6,10 @@
     background-position: center;
     background-repeat: no-repeat;
     border: none;
+    cursor: pointer;
+}
+
+.element__like:hover {
+    opacity: 0.6;
+    transition: linear 0.4s;
 }

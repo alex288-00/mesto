@@ -10,10 +10,12 @@
     line-height: 22px;
     font-weight: normal;
     color: white;
+    cursor: pointer;
 }
 
 .popup__button:hover {
     background-color: rgba(0, 0, 0, 0.8);
+    transition: linear 0.4s;
 }
 
 @media screen and (max-width: 425px) {

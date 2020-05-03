@@ -9,10 +9,12 @@
     background-position: center;
     background-color: #0000;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .popup__close:hover {
-    background-image: url(../../../images/Close\ Icon_hover.svg);
+   opacity: 0.6;
+   transition: linear 0.4s;
 }
 
 

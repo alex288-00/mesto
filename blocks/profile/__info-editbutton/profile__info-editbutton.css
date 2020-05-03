@@ -7,11 +7,13 @@
     background-image: url(../../../images/pen.svg);
     background-position: center;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .profile__info-editbutton:hover {
     border: 1px solid rgba(255, 255, 255, 0.6);
     background-image: url(../../../images/pen_hover.svg);
+    transition: linear 0.4s;
     
 }
 

@@ -7,11 +7,13 @@
     background-image: url(../../../images/plus.svg);
     background-position: center;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .profile__info-addbutton:hover {
     border: 2px solid rgba(255, 255, 255, 0.6);
-    background-image: url(../../../images/plushover.svg);
+    opacity: 0.6;
+    transition: linear 0.4s;
 }
 
 @media screen and (max-width: 735px) {

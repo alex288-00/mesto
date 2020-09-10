@@ -5,7 +5,6 @@
 @import url(./__field/popup__field.css);
 @import url(./__button/popup__button.css);
 @import url(./__close/popup__close.css);
-@import url(./_opened/popup_opened.css);
 @import url(./_hidden/popup_hidden.css);
 @import url(./__image/popup__image.css);
 
@@ -19,8 +18,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    visibility: visible;
-    opacity: 1;
+    visibility: hidden;
+    opacity: 0;
     transition: 0.5s linear;
-    
 }

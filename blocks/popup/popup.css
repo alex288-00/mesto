@@ -1,5 +1,4 @@
 @import url(./__container/popup__container.css);
-@import url(./__container/_img/popup__container_img.css);
 @import url(./__title/popup__title.css);
 @import url(./__subtitle/popup__subtitle.css);
 @import url(./__field/popup__field.css);
@@ -7,6 +6,8 @@
 @import url(./__close/popup__close.css);
 @import url(./_hidden/popup_hidden.css);
 @import url(./__image/popup__image.css);
+@import url(./__zoom-container/popup__zoom-container.css);
+
 
 .popup {
     display: flex;

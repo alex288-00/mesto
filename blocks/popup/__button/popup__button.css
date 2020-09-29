@@ -4,13 +4,12 @@
     background-color: black;
     border-radius: 2px;
     border: none;
-    margin-top: 48px;
-    margin-bottom: 36px;
     font-size: 18px;
     line-height: 22px;
     font-weight: normal;
     color: white;
     cursor: pointer;
+    align-self: center;
 }
 
 .popup__button:hover {

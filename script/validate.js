@@ -61,9 +61,22 @@ const enableValidation = (params) => {
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      const buttonElement = formElement.querySelector(params.submitButtonSelector);
+      buttonElement.setAttribute('disabled', true);
     });
+
     setEventListeners(params, formElement);
   });
+
+};
+
+//Очищение формы от ошибок 
+function clearFormErrors (formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  inputList.forEach((inputElement) =>{
+      hideInputError(formElement, inputElement, {inputErrorClass: 'popup__input_type_error'});
+  });
+
 };
 
 enableValidation({

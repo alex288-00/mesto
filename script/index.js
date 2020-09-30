@@ -27,28 +27,20 @@ function popupCloseByOverlay (evt) {
          if (evt.target !== popupOpened) {
         return
     }
-    closePopup (popupOpened)
-};
-
-//Очищение формы от ошибок 
-function clearFormErrors (formElement) {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    inputList.forEach((inputElement) =>{
-        hideInputError(formElement, inputElement, {inputErrorClass: 'popup__input_type_error'});
-    });
-
+    closePopup (popupOpened);
 };
 
 //Открытие попап
 function openPopup (popupElement) {
     popupElement.classList.add('popup_opened');
-    document.addEventListener('keydown', closePopupByEsc);
-    //Проверяется заполнения формы при открытии попап 
+    document.addEventListener('keyup', closePopupByEsc);
+    //Уважаемый код-ревьюер, я вызываю тут функцию enableValidation для проверки заполнения формы при открытии попап. 
+    //Функция enableValidation уже есть в файле validate.js
     enableValidation({
         formSelector: '.popup__form',
         inputSelector: '.popup__input',
         submitButtonSelector: '.popup__button',
-        inactiveButtonClass: 'popup__button_disabled',
+        inactiveButtonClass: 'popup__button_disabled'
     });
         
 };
@@ -56,16 +48,16 @@ function openPopup (popupElement) {
 //Закрытие попап
 function closePopup (popupElement) {  
     popupElement.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupByEsc); 
+    document.removeEventListener('keyup', closePopupByEsc); 
     clearFormErrors(popupElement);           
 };
 
 popup.addEventListener('click', popupCloseByOverlay);
 popupImg.addEventListener('click', popupCloseByOverlay);
 
-
 //Функция открытия popup редактирования профиля
-function editProfile () {
+function editProfile (evt) {
+    evt.preventDefault();
     nameInput.value = infoName.textContent;
     jobInput.value = infoJob.textContent;
     openPopup(popup)
@@ -75,7 +67,7 @@ function editProfile () {
 function saveProfile () {
     infoName.textContent = nameInput.value;
     infoJob.textContent = jobInput.value;   
-    closePopup(popup);     
+    closePopup(popup);    
 };
 
 //Открытие попап профиля
@@ -133,13 +125,13 @@ function createCard (link, name) {
     const removeBtn = elemTrash;
     removeBtn.addEventListener('click', function() {
         removeBtn.parentElement.remove();
-
 });
+
     //Лайк карточки
     elemLike.addEventListener('click', function(evt) {
         evt.target.classList.toggle('element__like_active');
-
 });
+
     //Открытие Popup изображения
     const imagePopupButton = cardImage;
     const bigImg = document.querySelector('.popup__image');
@@ -149,7 +141,6 @@ function createCard (link, name) {
         bigImg.src = link;
         bigImg.alt = name;
         bigImgSubtitle.textContent = name;    
-
 });
  
     return elementNew;
@@ -157,14 +148,11 @@ function createCard (link, name) {
 
 initialCards.forEach(({link, name}) => {
      elements.prepend(createCard(link,name));
-
 });
 
 //Закрытие Popup изображения
 closePopupImg.addEventListener('click', function() {
-    closePopup(popupImg); 
-    
-
+    closePopup(popupImg);    
 });
 
 const popupAddPlace = document.querySelector('.popup_add-card');
@@ -176,19 +164,26 @@ addPlaceButton.addEventListener('click', function () {
     openPopup(popupAddPlace); 
     popupAddUrl.value = '';
     popupAddName.value = ''; 
+    enableValidation({
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__button',
+        inactiveButtonClass: 'popup__button_disabled'
+      }); 
+   
 });
 
 const popupClose = popupAddPlace.querySelector('.popup__close');
 popupClose.addEventListener('click', function () {
     closePopup(popupAddPlace); 
-
 });
+
 popupAddPlace.addEventListener('click', popupCloseByOverlay);
 
 //Добавление нового места
-popupAddPlace.querySelector('.popup__form').addEventListener('submit',function() {
+popupAddPlace.querySelector('.popup__form').addEventListener('submit',function(evt) {
+    evt.preventDefault();
     closePopup(popupAddPlace); 
-    elements.prepend(createCard(popupAddUrl.value, popupAddName.value));   
-     
+    elements.prepend(createCard(popupAddUrl.value, popupAddName.value));      
 });
 

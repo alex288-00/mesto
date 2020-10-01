@@ -159,18 +159,10 @@ const popupAddPlace = document.querySelector('.popup_add-card');
 const popupAddName = popupAddPlace.querySelector('.popup__input_mesto');
 const popupAddUrl = popupAddPlace.querySelector('.popup__input_link');
 const popupAddTitle = popupAddPlace.querySelector('.popup__title_add-card');
+const formAddPlace = popupAddPlace.querySelector('.popup__form');
 
 addPlaceButton.addEventListener('click', function () {
-    openPopup(popupAddPlace); 
-    popupAddUrl.value = '';
-    popupAddName.value = ''; 
-    enableValidation({
-        formSelector: '.popup__form',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__button',
-        inactiveButtonClass: 'popup__button_disabled'
-      }); 
-   
+    openPopup(popupAddPlace);    
 });
 
 const popupClose = popupAddPlace.querySelector('.popup__close');
@@ -181,9 +173,10 @@ popupClose.addEventListener('click', function () {
 popupAddPlace.addEventListener('click', popupCloseByOverlay);
 
 //Добавление нового места
-popupAddPlace.querySelector('.popup__form').addEventListener('submit',function(evt) {
+    formAddPlace.addEventListener('submit',function(evt) {
     evt.preventDefault();
     closePopup(popupAddPlace); 
-    elements.prepend(createCard(popupAddUrl.value, popupAddName.value));      
+    elements.prepend(createCard(popupAddUrl.value, popupAddName.value));   
+    formAddPlace.reset();
 });
 

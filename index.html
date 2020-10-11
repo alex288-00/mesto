@@ -41,7 +41,7 @@
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
         <div class="popup popup_profile">
-            <form class="popup__form" novalidate>
+            <form class="popup__form popup__form_profile" novalidate>
                 <h2 class="popup__title popup__title_profile">Редактировать профиль</h2>
                 <button type="button" class="popup__close"></button>
                 <input class="popup__input popup__input_name" id="name-input" type="text" placeholder="Имя" minlength="2" maxlength="40" required>
@@ -52,7 +52,7 @@
             </form>
         </div>
         <div class="popup popup_add-card">
-            <form class="popup__form" novalidate>
+            <form class="popup__form popup__form_add-card" novalidate>
                 <h2 class="popup__title popup__title_add-card">Новое место</h2>
                 <button type="button" class="popup__close"></button>
                 <input class="popup__input popup__input_mesto" id="mesto-input" type="text" placeholder="Название" minlength="2" maxlength="30" required>
@@ -70,7 +70,6 @@
             </div>
         </div>
     </div> 
-    <script src="./script/validate.js"></script>
-    <script src="./script/index.js"></script>   
+    <script type="module" src="./script/index.js"></script>       
 </body>
 </html>

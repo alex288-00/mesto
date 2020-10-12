@@ -10,7 +10,9 @@ export class FormValidator {
     this._inactiveButtonClass = params.inactiveButtonClass;
     this._inputErrorClass = params.inputErrorClass;
     this._errorClass = params.errorClass;
-  }
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._params.submitButtonSelector);
+  };
   
   //Показываем ошибку
   _showInputError(formElement, inputElement, errorMessage) {
@@ -19,14 +21,14 @@ export class FormValidator {
     inputElement.classList.add(this._params.inputErrorClass);
   };
 
-    //Скрываем ошибку
+  //Скрываем ошибку
   _hideInputError(formElement, inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = '';
     inputElement.classList.remove(this._params.inputErrorClass); 
   };
     
-    //Проверяем инпуты на валидность добавляем/снимаем текст ошибки
+  //Проверяем инпуты на валидность добавляем/снимаем текст ошибки
   _checkInputValidity(formElement, inputElement) {
     const isInputNotValid = !inputElement.validity.valid;
     if (isInputNotValid) {
@@ -37,44 +39,61 @@ export class FormValidator {
     }
   };
     
-    //Проверка на валидность и изменение кнопки активная/неактивная
-  _toggleButtonState (inputList, buttonElement) {
+  // Кнопка неактивна
+  _disabledButtonState(buttonElement) {
+    buttonElement.classList.add(this._params.inactiveButtonClass);
+    buttonElement.setAttribute('disabled', true);
+  };
+
+  // Кнопка активна
+  _enabledButtonState(buttonElement) {
+    buttonElement.classList.remove(this._params.inactiveButtonClass);
+    buttonElement.removeAttribute('disabled');
+  };
+
+  //Проверка на валидность и изменение кнопки активная/неактивная
+  _checkInputValidityForButton (inputList, buttonElement) {
     const hasInvalidInput = inputList.some((inputElement) => !inputElement.validity.valid);
     if (hasInvalidInput) {
-      buttonElement.classList.add(this._params.inactiveButtonClass);
-      buttonElement.setAttribute('disabled', true);
+      this._disabledButtonState(buttonElement)
     } else {
-      buttonElement.classList.remove(this._params.inactiveButtonClass);
-      buttonElement.removeAttribute('disabled');
+      this._enabledButtonState(buttonElement)
     }
   };
-    
-    //Вешаем обработчики событий
+
+  //Вешаем обработчики событий
   _setEventListeners (formElement) {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
-    const buttonElement = this._formElement.querySelector(this._params.submitButtonSelector);
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(formElement, inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._checkInputValidityForButton(this._inputList, this._buttonElement);
       });
 
     });
 
-    this._toggleButtonState(inputList, buttonElement);
+    this._checkInputValidityForButton(this._inputList, this._buttonElement);
   };
+
+  // Очищение формы от ошибок
+  clearFormErrors (formElement) {
+    this._inputList.forEach((inputElement) =>{
+        const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+        errorElement.textContent = '';
+        inputElement.classList.remove(this._params.inputErrorClass);
+        inputElement.value = '';
+    });
+
+};
     
-    //Функция проверки валидности формы
+  //Функция проверки валидности формы
   enableValidation () {  
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      const buttonElement = this._formElement.querySelector(this._params.submitButtonSelector);
-      buttonElement.setAttribute('disabled', true);
-      buttonElement.classList.add(this._params.inactiveButtonClass)
+      this._disabledButtonState(this._buttonElement);
     });
 
     this._setEventListeners(this._params, this._formElement);
     };
-}
+};
 
 

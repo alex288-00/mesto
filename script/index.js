@@ -49,7 +49,7 @@ function closePopup (popupElement) {
 //Функция открытия popup редактирования профиля
 function editProfile (evt) {
     evt.preventDefault();
-    formEditProfileValidator.clearFormErrors(popup);
+    formEditProfileValidator.clearFormErrors();
     nameInput.value = infoName.textContent;
     jobInput.value = infoJob.textContent;
     openPopup(popup);
@@ -103,7 +103,7 @@ const formAddPlace = popupAddPlace.querySelector('.popup__form');
 //Открытие Popup нового места
 addPlaceButton.addEventListener('click', function () {
     openPopup(popupAddPlace); 
-    formAddPlaceValidator.clearFormErrors(popupAddPlace);
+    formAddPlaceValidator.clearFormErrors();
 
 });
 

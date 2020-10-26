@@ -27,10 +27,20 @@ export class Popup {
         }
     }
 
+    _popupCloseByOverlay(evt) {
+        if (evt.target !== this._popupSelector) {
+            return;
+        }
+        this.close()
+    }
+
     //Метод добавляет слушатель клика иконке закрытия попапа.
     setEventListeners() {
         this._popupCloseBtn.addEventListener('click', () => {
             this.close()
         })
+        this._popupSelector.addEventListener('click', (evt) => {
+            this._popupCloseByOverlay(evt)
+        }) 
     }
 }

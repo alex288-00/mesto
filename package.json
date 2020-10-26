@@ -4,7 +4,7 @@
   "description": "**Это сервис по добавлению интересных мест. С помощью сервиса вы можете создать и отредактировать свой профиль, ознакомиться с различными местами и оценить**",
   "main": "index.js",
   "scripts": {
-    "build": "rd /s /q dist && webpack",
+    "build": "rimraf dist && webpack",
     "dev": "webpack serve --mode development --env development --watch"
   },
   "repository": {

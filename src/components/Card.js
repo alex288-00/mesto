@@ -12,11 +12,6 @@ export class Card {
         return document.querySelector(this._selector).content.cloneNode(true).children[0];
     }
 
-    //Открытие попап изображения
-    _handleCardClick() {
-        this._handleCardClick(this._link, this._name);
-    }
-
     //Удаление карточки
     _deleteHandler() {
         this._element.remove();

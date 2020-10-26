@@ -20,12 +20,26 @@ module.exports = {
             // исключает папку node_modules, файлы в ней обрабатывать не нужно
             exclude: '/node_modules/'
           },
+
           {
-            // регулярное выражение, которое ищет все файлы с такими расширениями
-            test: /\.(png|svg|jpg|gif|woff|woff2)$/,
-            // при обработке этих файлов нужно использовать file-loader
-            loader: 'file-loader'
-          },
+            test: /\.(png|svg|jpg|gif)$/,
+            loader: 'file-loader?name=./images/[name].[ext]'
+       },
+       {
+            test: /\.(eot|ttf|woff|woff2)$/,
+            loader: 'file-loader?name=./vendor/[name].[ext]',
+       },
+       //Почему при данной реализации вебпак не переводит название картинок и шрифтов в хэш, 
+       //а оставляет изначальные имена, правильно ли так?
+
+
+
+          // {
+          //   // регулярное выражение, которое ищет все файлы с такими расширениями
+          //   test: /\.(png|svg|jpg|gif|woff|woff2)$/,
+          //   // при обработке этих файлов нужно использовать file-loader
+          //   loader: 'file-loader'
+          // },
           // аналогично добавьте правило для работы с html
           {
             test: /\.html$/,

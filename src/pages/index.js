@@ -1,13 +1,13 @@
-import './pages/index.css';
+import '../pages/index.css';
 import {initialCards, params, popupProfile, editProfileBtn, popupProfileForm, nameInput,
-    jobInput, popupImg, addPlaceButton, popupAddPlace} from './utils/constants.js';
-import {Card} from './components/Card.js';
-import {FormValidator} from './components/FormValidator.js';
-import {Section} from './components/Section.js'
-import {PopupWithForm} from './components/PopupWithForm.js';
-import {Popup} from './components/Popup.js';
-import {PopupWithImage} from './components/PopupWithImage.js';
-import {UserInfo} from './components/UserInfo.js'
+    jobInput, popupImg, addPlaceButton, popupAddPlace} from '../utils/constants.js';
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {Section} from '../components/Section.js'
+import {PopupWithForm} from '../components/PopupWithForm.js';
+import {Popup} from '../components/Popup.js';
+import {PopupWithImage} from '../components/PopupWithImage.js';
+import {UserInfo} from '../components/UserInfo.js'
 
 //Создание карточек из массива
 const cardList = new Section({
@@ -15,8 +15,8 @@ const cardList = new Section({
     renderer: (item) => {
         const card = new Card(item,'#element-temp', {
             handleCardClick: () =>{
-                new PopupWithImage('.popup_img').open(item.link, item.name)
-            }})
+                popupWithImage.open(item.link, item.name)
+            }});
         const cardElement = card.createCard();
         cardList.addItem(cardElement);
     }
@@ -30,7 +30,7 @@ const formPlace = new PopupWithForm ({
     callbackSubmit: (item) => {
         const card = new Card(item, '#element-temp', {
             handleCardClick: () => {
-                new PopupWithImage('.popup_img').open(item.link, item.name)
+                popupWithImage.open(item.link, item.name)
             } });
         const cardElement = card.createCard();
         cardList.addItem(cardElement);
@@ -40,18 +40,23 @@ const formPlace = new PopupWithForm ({
 
 formPlace.setEventListeners();
 
+//Экземпляр класса PopupWithImage
+const popupWithImage = new PopupWithImage('.popup_img');
+
+//Закрытие Popup изображения
+popupWithImage.setEventListeners();
+
 //Открытие Popup нового места
 addPlaceButton.addEventListener('click', function () {
     formPlace.open();
     formAddPlaceValidator.clearFormErrors();
-
 });
 
 //Экземпляр класса UserInfo
 const user = new UserInfo({
     userName: '.profile__info-name',
     userProfession: '.profile__info-job'
-})
+});
 
 //Экземпляр класса PopupWithForm
 const formProfile = new PopupWithForm({
@@ -77,12 +82,6 @@ popupProfileForm.addEventListener('submit', () =>{
     user.getUserInfo().name = nameInput.value;
     user.getUserInfo().job = jobInput.value;
 });
-
-//Экземпляр класса PopupWithImage
-const zoomPopup = new PopupWithImage('.popup_img');
-
-//Закрытие Popup изображения
-zoomPopup.setEventListeners();
 
 //Экземпляры класса для валидации каждой формы
 const formEditProfileValidator = new FormValidator(params.formSelectorProfile, params);

@@ -4,6 +4,7 @@ export class UserInfo {
         this._userProfession = document.querySelector(userProfession);  
     }
 
+    //Возвращаем объект с данными пользователя
     getUserInfo() {
         return {
             name: this._userName.textContent,
@@ -11,6 +12,7 @@ export class UserInfo {
         }
     }
 
+    //Принимаем новые данные пользователя
     setUserInfo({name, job}) {
         this._userName.textContent = name;
         this._userProfession.textContent = job;

@@ -8,6 +8,7 @@ export class PopupWithForm extends Popup {
         this._callbackSubmit = callbackSubmit;
     }
 
+    //Метод собирает данные всех полей формы
     _getInputValues() {
         this._inputList = this._popupSelector.querySelectorAll('.popup__input');
         this._formValues = {};
@@ -18,6 +19,7 @@ export class PopupWithForm extends Popup {
         return this._formValues;
     }
 
+    //Обработчик сабмита формы
     setEventListeners() {
         super.setEventListeners()
         this._popupFormSelector.addEventListener('submit', () => {
@@ -26,6 +28,7 @@ export class PopupWithForm extends Popup {
         
     }
 
+    //Закрытие попапа со сбрасывание формы
     close() {
         super.close();
         this._popupFormSelector.reset();

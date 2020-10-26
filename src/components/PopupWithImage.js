@@ -8,6 +8,7 @@ export  class PopupWithImage extends Popup {
         this._bigImg = document.querySelector('.popup__image');
     }
 
+    //Подставляем ссылку на изображение и подпись
     open(link, name) {
         super.open()
         this._bigImg.src = link;

@@ -1,4 +1,14 @@
-export {initialCards, params}
+export {initialCards, params, popupProfile, editProfileBtn, popupProfileForm, nameInput,
+    jobInput, popupImg, addPlaceButton, popupAddPlace}
+
+const popupProfile = document.querySelector('.popup');
+const popupImg = document.querySelector('.popup_img');
+const popupAddPlace = document.querySelector('.popup_add-card');
+const editProfileBtn = document.querySelector('.profile__info-editbutton');
+const popupProfileForm = document.querySelector('.popup__form');
+const nameInput = document.querySelector('.popup__input_name');
+const jobInput = document.querySelector('.popup__input_job');
+const addPlaceButton = document.querySelector('.profile__info-addbutton');
 
 //Массив карточек
 const initialCards = [

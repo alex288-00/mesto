@@ -1,18 +1,18 @@
 
 export class Card {
-    constructor(link, name, selector, openPopupImg) {
-        this._link = link;
-        this._name = name;
+    constructor(data, selector, {handleCardClick}) {
+        this._link = data.link;
+        this._name = data.name;
         this._selector = selector;
-        this._openPopupImg = openPopupImg;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTamplate() {
         return document.querySelector(this._selector).content.cloneNode(true).children[0];
     }
 
-    _openPopupImg() {
-        this._openPopupImg(this._link, this._name);
+    _handleCardClick() {
+        this._handleCardClick(this._link, this._name);
     }
 
     _deleteHandler() {
@@ -26,7 +26,7 @@ export class Card {
     _setListeners() {
         this._element.querySelector('.element__trash').addEventListener('click', () => this._deleteHandler());
         this._element.querySelector('.element__like').addEventListener('click', (evt) => this._likeHandler(evt));
-        this._element.querySelector('.element__image').addEventListener('click', () => this._openPopupImg(this._link, this._name));
+        this._element.querySelector('.element__image').addEventListener('click', () => this._handleCardClick(this._link, this._name));
     }
 
     createCard() {

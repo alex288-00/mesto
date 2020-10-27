@@ -56,15 +56,11 @@ const user = new UserInfo({
     userProfession: '.profile__info-job'
 });
 
-const userInfoText = user.getUserInfo();
-
-//Экземпляр класса PopupWithForm
+//Экземпляр класса PopupWithForm для сохранения информации о профиле
 const formProfile = new PopupWithForm({
     popupSelector: '.popup_profile',
     callbackSubmit: (item) => {
         user.setUserInfo(item)
-        userInfoText.name = nameInput.value;
-        userInfoText.job = jobInput.value;
         formProfile.close();
     }
 }, '.popup__form_profile');
@@ -73,10 +69,11 @@ formProfile.setEventListeners();
 
 //Открытие попап профиля и редактироавние
 editProfileBtn.addEventListener('click', () => {
-    formEditProfileValidator.clearFormErrors(); 
-    formProfile.open();
+    const userInfoText = user.getUserInfo();
+    formEditProfileValidator.clearFormErrors();
     nameInput.value = userInfoText.name;
     jobInput.value = userInfoText.job;
+    formProfile.open();
 });
 
 //Экземпляры класса для валидации каждой формы

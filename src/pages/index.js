@@ -15,6 +15,13 @@ const api = new Api({
     headers: '206505f6-db9d-4d3e-9753-f9e84f791b0d'
 });
 
+//Экземпляр Section
+const cardList = new Section({
+    renderer: (item, myId) => {
+        createCardFunction(item, '#element-temp', myId)
+    } 
+ }, '.elements');
+
 Promise.all([api.getInitialCards(), api.getUserData()])
 .then(([cards, userData]) => {
     cardList.renderItems(cards, userData._id);
@@ -25,25 +32,6 @@ Promise.all([api.getInitialCards(), api.getUserData()])
 .catch((err) => {
     console.log('Произошла ошибка:', err)
 })
-
-//Экземпляр PopupConfirmation
-const deleteCard = new PopupConfirmation({
-    popupSelector: '.popup_form-confirm',
-    callbackSubmit: (card) => {
-        const id = card.getId()
-        api.deleteCard(id)
-        .then(() => {
-            card.deleteHandler();
-            deleteCard.close()
-        })
-
-        .catch((err) => {
-            console.log('Произошла ошибка:', err)
-        })
-    }
-})
-
-deleteCard.setEventListeners();
 
  //Функционал создания карточек
 const createCardFunction = (item, selector, myId) => {
@@ -84,13 +72,6 @@ const createCardFunction = (item, selector, myId) => {
     const cardElement = card.createCard(myId);
     cardList.addItem(cardElement);
 };
-
-//Экземпляр Section
- const cardList = new Section({
-       renderer: (item, myId) => {
-           createCardFunction(item, '#element-temp', myId)
-       } 
-    }, '.elements');
 
 //Создание нового места
 const formPlace = new PopupWithForm ({
@@ -196,6 +177,25 @@ editProfileBtn.addEventListener('click', () => {
     jobInput.value = userInfoText.about;
     formProfile.open();
 });
+
+//Экземпляр PopupConfirmation
+const deleteCard = new PopupConfirmation({
+    popupSelector: '.popup_form-confirm',
+    callbackSubmit: (card) => {
+        const id = card.getId()
+        api.deleteCard(id)
+        .then(() => {
+            card.deleteHandler();
+            deleteCard.close()
+        })
+
+        .catch((err) => {
+            console.log('Произошла ошибка:', err)
+        })
+    }
+});
+
+deleteCard.setEventListeners();
 
 //Экземпляры класса для валидации каждой формы
 const formEditProfileValidator = new FormValidator(params.formSelectorProfile, params);

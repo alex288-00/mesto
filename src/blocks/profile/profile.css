@@ -5,6 +5,10 @@
 @import url(./__info-name/profile__info-name.css);
 @import url(./__info-job/profile__info-job.css);
 @import url(./__info-addbutton/profile__info-addbutton.css);
+@import url(./__update/profile__update.css);
+@import url(./__update-btn/profile__update-btn.css);
+@import url(./__container/profile__container.css);
+
 .profile {
     max-width: 882px;
     margin: 0 auto;

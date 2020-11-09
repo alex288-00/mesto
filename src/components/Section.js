@@ -1,6 +1,5 @@
 export class Section {
-    constructor({items, renderer}, containerSelector){
-        this._renderItems = items;
+    constructor({renderer}, containerSelector){
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
     }
@@ -11,9 +10,9 @@ export class Section {
     }
 
     //Метод отвечает за отрисовку всех элементов
-    renderItems() {
-        this._renderItems.forEach(item => {
-            this._renderer(item)
+    renderItems(res,myId) {
+        res.forEach(item => {
+            this._renderer(item,myId)
         })
 
     }

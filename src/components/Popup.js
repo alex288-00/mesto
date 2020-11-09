@@ -5,19 +5,16 @@ export class Popup {
     }
 
     //Открытие попапа 
-    open() {
+    open(deleteCard) {
         this._popupSelector.classList.add('popup_opened');
-        document.addEventListener('keyup', (evt) => {
-            this._handleEscClose(evt)
-        })
+        document.addEventListener('keyup', this._handleEscClose.bind(this));
+        this._popupSelector.addEventListener('submit', deleteCard)
     }
 
     //Закрытие попапа 
     close() {
         this._popupSelector.classList.remove('popup_opened');
-        document.removeEventListener('keyup', (evt) => {
-            this._handleEscClose(evt)
-        })
+        document.removeEventListener('keyup', this._handleEscClose.bind(this));
     }
 
     //Реализация закрытия попапа по нажатию клавиши Esc
@@ -27,6 +24,7 @@ export class Popup {
         }
     }
 
+    //Реализация закрытия попапа при клике в пустую область
     _popupCloseByOverlay(evt) {
         if (evt.target !== this._popupSelector) {
             return;
@@ -36,11 +34,7 @@ export class Popup {
 
     //Метод добавляет слушатель клика иконке закрытия попапа.
     setEventListeners() {
-        this._popupCloseBtn.addEventListener('click', () => {
-            this.close()
-        })
-        this._popupSelector.addEventListener('click', (evt) => {
-            this._popupCloseByOverlay(evt)
-        }) 
+        this._popupCloseBtn.addEventListener('click', this.close.bind(this));
+        this._popupSelector.addEventListener('click', this._popupCloseByOverlay.bind(this));
     }
 }

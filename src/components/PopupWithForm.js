@@ -6,6 +6,7 @@ export class PopupWithForm extends Popup {
         this._popupFormSelector = document.querySelector(popupFormSelector);
         this._popupSelector = document.querySelector(popupSelector);
         this._callbackSubmit = callbackSubmit;
+        this._btnSelector = this._popupSelector.querySelector('.popup__button').textContent
     }
 
     //Метод собирает данные всех полей формы
@@ -32,5 +33,15 @@ export class PopupWithForm extends Popup {
     close() {
         super.close();
         this._popupFormSelector.reset();
+    }
+
+    //Установка прелоадера
+    loadingBtnOn() {
+        this._popupSelector.querySelector('.popup__button').textContent = 'Сохранение..'
+    }
+
+    //Снятие прелоадера
+    loadingBtnOff() {
+        this._popupSelector.querySelector('.popup__button').textContent = this._btnSelector
     }
 }

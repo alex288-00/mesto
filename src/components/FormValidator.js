@@ -13,7 +13,7 @@ export class FormValidator {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
     this._buttonElement = this._formElement.querySelector(this._params.submitButtonSelector);
   };
-  
+
   //Показываем ошибку
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
@@ -25,9 +25,9 @@ export class FormValidator {
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = '';
-    inputElement.classList.remove(this._params.inputErrorClass); 
+    inputElement.classList.remove(this._params.inputErrorClass);
   };
-    
+
   //Проверяем инпуты на валидность добавляем/снимаем текст ошибки
   _checkInputValidity(inputElement) {
     const isInputNotValid = !inputElement.validity.valid;
@@ -38,7 +38,7 @@ export class FormValidator {
       this._hideInputError(inputElement);
     }
   };
-    
+
   // Кнопка неактивна
   _disabledButtonState() {
     this._buttonElement.classList.add(this._params.inactiveButtonClass);
@@ -76,22 +76,22 @@ export class FormValidator {
 
   // Очищение формы от ошибок
   clearFormErrors() {
-    this._inputList.forEach((inputElement) =>{
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
       inputElement.value = '';
     });
 
-};
-    
+  };
+
   //Функция проверки валидности формы
-  enableValidation() {  
+  enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._disabledButtonState();
     });
 
     this._setEventListeners();
-    };
+  };
 };
 
 

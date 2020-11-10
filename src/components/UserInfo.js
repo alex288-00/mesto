@@ -1,7 +1,7 @@
 export class UserInfo {
-    constructor({userName, userProfession}) {
+    constructor({ userName, userProfession }) {
         this._userName = document.querySelector(userName);
-        this._userProfession = document.querySelector(userProfession);  
+        this._userProfession = document.querySelector(userProfession);
         this._userAvatar = document.querySelector('.profile__avatar');
     }
 
@@ -14,7 +14,7 @@ export class UserInfo {
     }
 
     //Принимаем новые данные пользователя
-    setUserInfo({name, about}) {
+    setUserInfo({ name, about }) {
         this._userName.textContent = name;
         this._userProfession.textContent = about;
     }

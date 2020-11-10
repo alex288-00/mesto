@@ -2,19 +2,20 @@ export class Popup {
     constructor(popupSelector) {
         this._popupSelector = document.querySelector(popupSelector);
         this._popupCloseBtn = this._popupSelector.querySelector('.popup__close');
+        this._handleEscClose = this._handleEscClose.bind(this)
     }
 
     //Открытие попапа 
     open(deleteCard) {
         this._popupSelector.classList.add('popup_opened');
-        document.addEventListener('keyup', this._handleEscClose.bind(this));
+        document.addEventListener('keyup', this._handleEscClose);
         this._popupSelector.addEventListener('submit', deleteCard)
     }
 
     //Закрытие попапа 
     close() {
         this._popupSelector.classList.remove('popup_opened');
-        document.removeEventListener('keyup', this._handleEscClose.bind(this));
+        document.removeEventListener('keyup', this._handleEscClose);
     }
 
     //Реализация закрытия попапа по нажатию клавиши Esc

@@ -1,15 +1,15 @@
 export class Api {
-    constructor({baseUrl, headers}) {
+    constructor({ baseUrl, headers }) {
         this._baseUrl = baseUrl;
         this._headers = headers;
     }
 
     //Статус ответа
     _statusJson(res) {
-         if (res.ok) {
-             return res.json()
-         }
-         return Promise.reject(`Ошибка: ${res.status}`)
+        if (res.ok) {
+            return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
     }
 
     //Запрашиваем информацию о пользователе
@@ -20,7 +20,7 @@ export class Api {
             }
         })
 
-        .then(this._statusJson)
+            .then(this._statusJson)
     }
 
     //Запрашиваем карточки
@@ -30,8 +30,8 @@ export class Api {
                 authorization: this._headers
             }
         })
-    
-        .then(this._statusJson)
+
+            .then(this._statusJson)
     }
 
     //Обновляем информацию о пользователе
@@ -49,7 +49,7 @@ export class Api {
 
         })
 
-        .then(this._statusJson)
+            .then(this._statusJson)
     }
 
     //Отправляем новую карточку на сервер
@@ -67,7 +67,7 @@ export class Api {
 
         })
 
-        .then(this._statusJson)
+            .then(this._statusJson)
     }
 
     //Обновляем массив лайков
@@ -79,7 +79,7 @@ export class Api {
             }
         })
 
-        .then(this._statusJson)
+            .then(this._statusJson)
     }
 
     //Удаляем лайк из массива
@@ -89,9 +89,9 @@ export class Api {
             headers: {
                 authorization: this._headers
             }
-        }) 
+        })
 
-        .then(this._statusJson)
+            .then(this._statusJson)
     }
 
     //Удаляем карточку
@@ -103,7 +103,7 @@ export class Api {
             }
         })
 
-        .then(this._statusJson)
+            .then(this._statusJson)
     }
 
     //Обновляем аватар пользователя
@@ -120,7 +120,7 @@ export class Api {
 
         })
 
-        .then(this._statusJson)
+            .then(this._statusJson)
     }
 
 }

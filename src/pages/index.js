@@ -1,13 +1,13 @@
 import '../pages/index.css';
-import {Api} from '../components/Api.js';
-import {params, editProfileBtn, nameInput,jobInput, addPlaceButton, avatarBtn} from '../utils/constants.js';
-import {Card} from '../components/Card.js';
-import {FormValidator} from '../components/FormValidator.js';
-import {Section} from '../components/Section.js'
-import {PopupWithForm} from '../components/PopupWithForm.js';
-import {PopupWithImage} from '../components/PopupWithImage.js';
-import {UserInfo} from '../components/UserInfo.js'
-import {PopupConfirmation} from '../components/PopupConfirmation.js';
+import { Api } from '../components/Api.js';
+import { params, editProfileBtn, nameInput, jobInput, addPlaceButton, avatarBtn } from '../utils/constants.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js'
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { UserInfo } from '../components/UserInfo.js'
+import { PopupConfirmation } from '../components/PopupConfirmation.js';
 
 
 const api = new Api({
@@ -19,51 +19,51 @@ const api = new Api({
 const cardList = new Section({
     renderer: (item, myId) => {
         createCardFunction(item, '#element-temp', myId)
-    } 
- }, '.elements');
+    }
+}, '.elements');
 
 Promise.all([api.getInitialCards(), api.getUserData()])
-.then(([cards, userData]) => {
-    cardList.renderItems(cards, userData._id);
-    user.setUserInfo(userData);
-    user.setUserAvatar(userData);
-})
+    .then(([cards, userData]) => {
+        cardList.renderItems(cards, userData._id);
+        user.setUserInfo(userData);
+        user.setUserAvatar(userData);
+    })
 
-.catch((err) => {
-    console.log('Произошла ошибка:', err)
-})
+    .catch((err) => {
+        console.log('Произошла ошибка:', err)
+    })
 
- //Функционал создания карточек
+//Функционал создания карточек
 const createCardFunction = (item, selector, myId) => {
     const card = new Card(item, selector, myId, {
-        handleCardClick: (link, name) =>{
+        handleCardClick: (link, name) => {
             popupWithImage.open(link, name)
         },
         handleCardDelete: () => {
-            deleteCard.open(card);   
+            deleteCard.open(card);
         },
         handleCardLike: () => {
             const id = card.getId()
-            if(card.liked()) {
+            if (card.liked()) {
                 api.deleteLike(id)
-                .then((res) => {
-                    card.updateLike(res.likes.length)
-                })
+                    .then((res) => {
+                        card.updateLike(res.likes.length)
+                    })
 
-                .catch((err) => {
-                    console.log('Произошла ошибка:', err)
-                })
+                    .catch((err) => {
+                        console.log('Произошла ошибка:', err)
+                    })
 
             }
-            else{
+            else {
                 api.putLike(id)
-                .then((res) => {
-                    card.updateLike(res.likes.length)
-                })
+                    .then((res) => {
+                        card.updateLike(res.likes.length)
+                    })
 
-                .catch((err) => {
-                    console.log('Произошла ошибка:', err)
-                })
+                    .catch((err) => {
+                        console.log('Произошла ошибка:', err)
+                    })
 
             }
         }
@@ -74,26 +74,26 @@ const createCardFunction = (item, selector, myId) => {
 };
 
 //Создание нового места
-const formPlace = new PopupWithForm ({
+const formPlace = new PopupWithForm({
     popupSelector: '.popup_add-card',
     callbackSubmit: (cardData) => {
-        formPlace.loadingBtnOn()
+        formPlace.loadingBtnOn();
         api.postAddCard(cardData)
-        .then((res) => {
-            createCardFunction(res, '#element-temp', res.owner._id)
-        })
+            .then((res) => {
+                createCardFunction(res, '#element-temp', res.owner._id);
+                formPlace.close();
+            })
 
-        .catch((err) => {
-            console.log('Произошла ошибка:', err)
-        })
+            .catch((err) => {
+                console.log('Произошла ошибка:', err)
+            })
 
-        .finally(() => {
-            formPlace.loadingBtnOff()
-        })
-        
-        formPlace.close();
+            .finally(() => {
+                formPlace.loadingBtnOff();
+            })
+
     }
-},'.popup__form_add-card');
+}, '.popup__form_add-card');
 
 formPlace.setEventListeners();
 
@@ -110,26 +110,26 @@ addPlaceButton.addEventListener('click', function () {
 });
 
 //Обновление аватара пользователя
-const formAvatar = new PopupWithForm ({
+const formAvatar = new PopupWithForm({
     popupSelector: '.popup_update-avatar',
     callbackSubmit: (userData) => {
-        formAvatar.loadingBtnOn()
+        formAvatar.loadingBtnOn();
         api.patchUserAvatar(userData)
-        .then((res) => {
-            user.setUserAvatar(res)
-        })
+            .then((res) => {
+                user.setUserAvatar(res);
+                formAvatar.close();
+            })
 
-        .catch((err) => {
-            console.log('Произошла ошибка:', err)
-        })
+            .catch((err) => {
+                console.log('Произошла ошибка:', err)
+            })
 
-        .finally(() => {
-            formAvatar.loadingBtnOff()
-        })
-        formAvatar.close();
-        
+            .finally(() => {
+                formAvatar.loadingBtnOff();
+            })
+
     }
-},'.popup__form_update-avatar');
+}, '.popup__form_update-avatar');
 
 formAvatar.setEventListeners();
 
@@ -149,21 +149,21 @@ const user = new UserInfo({
 const formProfile = new PopupWithForm({
     popupSelector: '.popup_profile',
     callbackSubmit: (userData) => {
-        formProfile.loadingBtnOn()
+        formProfile.loadingBtnOn();
         api.patchUserData(userData)
-        .then((res) => {
-            user.setUserInfo(res)
-        })
+            .then((res) => {
+                user.setUserInfo(res);
+                formProfile.close();
+            })
 
-        .catch((err) => {
-            console.log('Произошла ошибка:', err)
-        })
+            .catch((err) => {
+                console.log('Произошла ошибка:', err)
+            })
 
-        .finally(() => {
-            formProfile.loadingBtnOff()
-        })
-       // user.setUserInfo(item)
-        formProfile.close();
+            .finally(() => {
+                formProfile.loadingBtnOff();
+            })
+
     }
 }, '.popup__form_profile');
 
@@ -184,14 +184,14 @@ const deleteCard = new PopupConfirmation({
     callbackSubmit: (card) => {
         const id = card.getId()
         api.deleteCard(id)
-        .then(() => {
-            card.deleteHandler();
-            deleteCard.close()
-        })
+            .then(() => {
+                card.deleteHandler();
+                deleteCard.close()
+            })
 
-        .catch((err) => {
-            console.log('Произошла ошибка:', err)
-        })
+            .catch((err) => {
+                console.log('Произошла ошибка:', err)
+            })
     }
 });
 

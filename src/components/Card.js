@@ -1,6 +1,6 @@
 
 export class Card {
-    constructor(data, selector, myId, {handleCardClick, handleCardDelete, handleCardLike}) {
+    constructor(data, selector, myId, { handleCardClick, handleCardDelete, handleCardLike }) {
         this._link = data.link;
         this._name = data.name;
         this._cardId = data._id;
@@ -42,22 +42,22 @@ export class Card {
         this._element.querySelector('.element__image').src = this._link;
         this._element.querySelector('.element__title').textContent = this._name;
         this._element.querySelector('.element__counter').textContent = this._likeSum;
-        if(this._ownerId != myId) {
+        if (this._ownerId != myId) {
             this._element.querySelector('.element__trash').classList.add('element__trash_hidden')
         }
         this._likes.forEach((item) => {
-            if(item._id == myId) {
+            if (item._id == myId) {
                 this._element.querySelector('.element__like').classList.add('element__like_active')
             }
         })
 
         this._setListeners();
         return this._element;
-    } 
+    }
 
     //Проверка лайкнута ли карточка
     liked() {
-        if(this._element.querySelector('.element__like').classList.contains('element__like_active')) {
+        if (this._element.querySelector('.element__like').classList.contains('element__like_active')) {
             return true
         }
         return false

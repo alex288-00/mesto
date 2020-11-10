@@ -1,4 +1,4 @@
-export {params, editProfileBtn, nameInput,jobInput, addPlaceButton, avatarBtn};
+export { params, editProfileBtn, nameInput, jobInput, addPlaceButton, avatarBtn };
 
 const editProfileBtn = document.querySelector('.profile__info-editbutton');
 const nameInput = document.querySelector('.popup__input_name');

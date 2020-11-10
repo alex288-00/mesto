@@ -1,7 +1,7 @@
-import {Popup} from './Popup.js';
+import { Popup } from './Popup.js';
 
 export class PopupConfirmation extends Popup {
-    constructor({popupSelector, callbackSubmit}) {
+    constructor({ popupSelector, callbackSubmit }) {
         super(popupSelector)
         this._popupSelector = document.querySelector(popupSelector);
         this._callbackSubmit = callbackSubmit

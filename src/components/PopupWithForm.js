@@ -1,7 +1,7 @@
-import {Popup} from './Popup.js';
+import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
-    constructor({popupSelector, callbackSubmit}, popupFormSelector) {
+    constructor({ popupSelector, callbackSubmit }, popupFormSelector) {
         super(popupSelector);
         this._popupFormSelector = document.querySelector(popupFormSelector);
         this._popupSelector = document.querySelector(popupSelector);
@@ -26,7 +26,7 @@ export class PopupWithForm extends Popup {
         this._popupFormSelector.addEventListener('submit', () => {
             this._callbackSubmit(this._getInputValues())
         })
-        
+
     }
 
     //Закрытие попапа со сбрасывание формы

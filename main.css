@@ -29,6 +29,7 @@
 .footer{max-width:882px;margin:66px auto 0;padding-bottom:60px}@media screen and (max-width:980px){.footer{padding-left:25px;padding-right:25px}}@media screen and (max-width:425px){.footer{padding-left:19px;padding-right:19px;margin-top:48px;padding-bottom:36px}}
 .popup__form{display:flex;flex-direction:column;background-color:#fff;border-radius:10px;position:relative;padding:36px;width:430px;height:300px}@media screen and (max-width:425px){.popup__form{width:238px;min-height:300px;padding:12px}}
 .popup__form_confirm{margin-bottom:0;height:180px}
+.popup__form_update-avatar{height:272px}
 .popup__title{font-size:24px;line-height:29px;font-weight:700;margin-top:34px;margin-bottom:54px}@media screen and (max-width:425px){.popup__title{font-size:19px;line-height:19px;margin-bottom:23px;width:80%}}
 .popup__subtitle{font-size:12px;line-height:15px;font-weight:400;color:#fff}
 .popup__input{width:358px;height:28px;font-size:17px;border:none;border-bottom:1px solid rgba(0,0,0,.2)}.popup__input:last-of-type{margin-bottom:0}@media screen and (max-width:425px){.popup__input{width:80%;height:20px}}
